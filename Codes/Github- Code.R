@@ -11,7 +11,7 @@ rm(list = ls())
 ## load data
 alldata <- read.csv("Dataset- Democratic Sanctions-HR.csv")
 
-## To get an overview results via OLS
+## To test results via OLS method
 simplereg = lm(civilrights ~ democratic_sanction, data= alldata)
 summary(simplereg)
 
@@ -26,7 +26,7 @@ FE_PTS = plm (PTS ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + confli
 summary(FE_PTS)
 
 
-##Applying FE on Specific case of Russia- Under Democratic sanctions imposed by the EU&US (2012-2015)- Civil Rights
+## Applying FE on Specific case of Russia- Under Democratic sanctions imposed by the EU&US (2012-2015)- Civil Rights
 alldata_filter <- alldata %>%
   filter(grepl('Russia', Country))
 
