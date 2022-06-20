@@ -9,7 +9,7 @@ rm(list = ls())
 
 
 ## load data
-alldata <- data.frame(read_excel("Dataset- Democratic Sanctions-HR.xlsx"))
+alldata <- read.csv("Dataset- Democratic Sanctions-HR.csv")
 
 ## To get an overview results via OLS
 simplereg = lm(civilrights ~ democratic_sanction, data= alldata)
@@ -25,6 +25,6 @@ summary(FE)
 alldata_filter <- alldata %>%
   filter(grepl('Russia', Country))
 
-fixed_intercept <- plm(civilrights ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
+FE_Russia <- plm(civilrights ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
                          ln_GDPgrowth + ln_GDPpc + ln_population + factor(year), index="Country", data= alldata_filter)
-summary(fixed_intercept)
+summary(FE_Russia)
