@@ -39,3 +39,7 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
  
+- name: R-actions
+  uses: Swechhya/R-actions@v1.2
+- name: R Package Validation Report
+  uses: insightsengineering/thevalidatoR@v1.2.1
