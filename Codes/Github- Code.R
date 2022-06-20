@@ -16,15 +16,20 @@ simplereg = lm(civilrights ~ democratic_sanction, data= alldata)
 summary(simplereg)
 
 ## Fixed effects on Civil Rights
-FE = plm (civilrights + PTS ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
+FE_civilrights = plm (civilrights ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
                 ln_GDPgrowth + ln_GDPpc + ln_population + factor(year), index="Country", data= alldata)
+summary(FE_civilrights)
 
-summary(FE)
+## Fixed effects on Personal Integrity
+FE_PTS = plm (PTS ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
+                ln_GDPgrowth + ln_GDPpc + ln_population + factor(year), index="Country", data= alldata)
+summary(FE_PTS)
 
-##Applying FE on Specific case of Russia- Under Democratic sanctions imposed by the EU&US (2012-2015)
+
+##Applying FE on Specific case of Russia- Under Democratic sanctions imposed by the EU&US (2012-2015)- Civil Rights
 alldata_filter <- alldata %>%
   filter(grepl('Russia', Country))
 
-FE_Russia <- plm(civilrights ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
+FE_Russia_civilrights <- plm(civilrights ~ democratic_sanction + coup1 + coup2 + coup3 + coup4 + conflict + one_sided_violence +
                          ln_GDPgrowth + ln_GDPpc + ln_population + factor(year), index="Country", data= alldata_filter)
-summary(FE_Russia)
+summary(FE_Russia_civilrights)
